@@ -6,11 +6,8 @@ import { RandomBackGroundColor, TypeColor } from "../api";
 
 const PokemonDetails = () => {
   let location = useLocation();
-  console.log(location);
   const data = location.state.data;
-  console.log(data);
   const id = Number(location.pathname.split("/")[2]);
-  console.log(data);
   return (
     <div className="max-w-7xl mx-auto min-h-screen grid place-items-center">
       <Link className="absolute top-20  text-lg left-20" to="/">
