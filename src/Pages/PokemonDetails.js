@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { GiBodyHeight, GiWeight } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { RandomBackGroundColor, TypeColor } from "../api";
 
 const PokemonDetails = () => {
   let location = useLocation();
@@ -8,26 +10,28 @@ const PokemonDetails = () => {
   const data = location.state.data;
   console.log(data);
   const id = Number(location.pathname.split("/")[2]);
-
+  console.log(data);
   return (
     <div className="max-w-7xl mx-auto min-h-screen grid place-items-center">
-      <div className="relative border border-black w-72 h-[500px] md:w-[500px] md:h-[700px] flex flex-col justify-start items-center p-5">
-        <h3 className="">{data.name}</h3>
+      <Link className="absolute top-20  text-lg left-20" to="/">
+        <IoIosArrowRoundBack color="black" className="text-6xl" /> Go Back
+      </Link>
+      <div
+        style={{ backgroundColor: RandomBackGroundColor() }}
+        className="relative rounded-xl text-white  w-72 h-[550px] md:w-[500px] md:h-[700px] flex flex-col justify-start items-center gap-y-5 p-5"
+      >
+        <div className="w-full flex flex-row justify-between items-center">
+          <h3 className="capitalize text-2xl">{data.name}</h3>
+          <span className="border rounded-full px-3 py-2 bg-white text-black">
+            {data.base_experience}
+          </span>
+        </div>
         <img
           src={data.sprites.other.dream_world.front_default}
-          className="object-contain border border-black px-10 py-1 md:px-32 md:py-5"
+          className="object-contain border border-white px-10 py-1 md:px-32 md:py-5"
           alt={data.name}
         />
-        <div className="w-full border border-black">
-          <p>
-            <GiBodyHeight />
-            <span>{data.height}</span>
-          </p>
-          <p>
-            <GiWeight />
-            <span>{data.weight}</span>
-          </p>
-        </div>
+
         <div className="w-full">
           <div className="w-full flex flex-row justify-between items-center">
             <div>
@@ -48,6 +52,20 @@ const PokemonDetails = () => {
             </div>
           </div>
         </div>
+        <div></div>
+        <ul className=" flex flex-row gap-x-20">
+          {data.types.map((type, i) => (
+            <li
+              key={i}
+              className="text-white text-base md:text-3xl flex flex-col justify-center items-center"
+            >
+              <span className="bg-white rounded-full px-3 py-3 text-black">
+                {TypeColor(type.type.name)}
+              </span>
+              <span className="text-base md:text-xl">{type.type.name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -60,3 +60,17 @@ export const TypeColor = (type) => {
       return <CgPokemon />;
   }
 };
+export const RandomBackGroundColor = () => {
+  const RandomNumber = Math.trunc(Math.random() * 8);
+  const ColorArray = [
+    "#3C42EB",
+    "#2AAF65",
+    "#F12F39",
+    "#FE9928",
+    "#FE5A64",
+    "#2B627D",
+    "#C153C0",
+    "#E0C0D6",
+  ];
+  return ColorArray[RandomNumber];
+};
